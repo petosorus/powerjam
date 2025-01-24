@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d32wo4kbuw2sj"]
+
+[ext_resource type="Script" path="res://bonus.gd" id="1_njoqc"]
+[ext_resource type="Texture2D" uid="uid://x3aovqyudamh" path="res://art/tiny_ship12.png" id="2_xcrao"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypf1n"]
+radius = 9.0
+height = 28.0
+
+[node name="Bonus follow" type="PathFollow2D"]
+script = ExtResource("1_njoqc")
+
+[node name="Bonus" type="Area2D" parent="."]
+rotation = -1.5708
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Bonus"]
+enable_node_path = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bonus"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ypf1n")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bonus"]
+texture = ExtResource("2_xcrao")
+
+[connection signal="area_entered" from="Bonus" to="." method="_on_bonus_area_entered"]
+[connection signal="screen_exited" from="Bonus/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

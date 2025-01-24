@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf63eq27evtlh"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_bluql"]
+[ext_resource type="Texture2D" uid="uid://cxgmx1ao3i3ix" path="res://art/tiny_ship10.png" id="2_8u6re"]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_bluql")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8u6re")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-40, 26, -40, 16, -10, -29, 10, -29, 40, 16, 40, 29, -40, 29)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
