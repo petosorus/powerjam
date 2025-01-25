@@ -27,18 +27,14 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
 
-
-#func _on_body_entered(body):
-	#hide()
-	#hit.emit()
-	#
-	#$CollisionShape2D.set_deferred("disabled", true)
-#
 func start(pos):
 	position = pos
 	show()
 	$CollisionPolygon2D.disabled = false
 
 func _on_area_entered(area: Area2D) -> void:
+	print(area, area.name)
 	if area.name.begins_with("Bonus"):
 		pass
+	if area.name.begins_with("Mob"):
+		queue_free()

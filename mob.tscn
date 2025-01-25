@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c28mfx5mxmoii"]
+
+[ext_resource type="Texture2D" uid="uid://bh3kojs63dr8a" path="res://art/tiny_ship20.png" id="1_7f51d"]
+[ext_resource type="Script" path="res://mob.gd" id="1_k4fnt"]
+
+[node name="Mob" type="PathFollow2D"]
+script = ExtResource("1_k4fnt")
+
+[node name="Mob" type="Area2D" parent="."]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Mob"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mob"]
+polygon = PackedVector2Array(-44, -32, -44, -16, -21, 13, -21, 37, 20, 37, 20, 13, 44, -16, 44, -32)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mob"]
+rotation = 1.5708
+texture = ExtResource("1_7f51d")

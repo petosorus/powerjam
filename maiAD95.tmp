@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_b8p3e"]
 [ext_resource type="PackedScene" uid="uid://cf63eq27evtlh" path="res://player.tscn" id="2_6poj5"]
-[ext_resource type="PackedScene" uid="uid://c28mfx5mxmoii" path="res://mob.tscn" id="2_vhd3h"]
 [ext_resource type="PackedScene" uid="uid://d32wo4kbuw2sj" path="res://bonus.tscn" id="3_y6vb0"]
+
+[sub_resource type="Curve2D" id="Curve2D_4i1vm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 248, -1, 0, 0, 0, 0, 248, 723)
+}
+point_count = 2
 
 [node name="Main" type="Node"]
 script = ExtResource("1_b8p3e")
-mob_scene = ExtResource("2_vhd3h")
 bonus_scene = ExtResource("3_y6vb0")
 
 [node name="Player" parent="." instance=ExtResource("2_6poj5")]
@@ -15,10 +19,9 @@ bonus_scene = ExtResource("3_y6vb0")
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 500)
 
-[node name="BonusTimer" type="Timer" parent="."]
-wait_time = 5.0
+[node name="BonusPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4i1vm")
 
-[node name="MobTimer" type="Timer" parent="."]
+[node name="BonusTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="BonusTimer" to="." method="_on_bonus_timer_timeout"]
-[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

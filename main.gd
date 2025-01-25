@@ -1,5 +1,6 @@
 extends Node
 
+@export var mob_scene: PackedScene
 @export var bonus_scene: PackedScene
 var score
 var bonuses = [
@@ -12,6 +13,7 @@ var bonuses = [
 func _ready():
 	$Player.start($StartPosition.position)
 	$BonusTimer.start()
+	$MobTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,9 +39,34 @@ func new_game():
 	#get_tree().call_group("mobs", "queue_free")
 
 
+func _new_path():
+	var path = Path2D.new()
+	var curve = Curve2D.new()
+	path.set_curve(curve)
+	
+	var width = get_viewport().get_visible_rect().size[0]
+	var height = get_viewport().get_visible_rect().size[1]
+	
+	var position = randi_range(0, width)
+	path.curve.add_point(Vector2(position, 0))
+	path.curve.add_point(Vector2(position, height))
+	
+	return path
+
 func _on_bonus_timer_timeout() -> void:
 	var bonus = bonus_scene.instantiate()
 	bonus.set_script(load(bonuses.pick_random()))
 	bonus.set_player($Player)
-	$BonusPath.add_child(bonus)
 	
+	var path = _new_path()
+	path.add_child(bonus)
+	add_child(path)
+	
+
+
+func _on_mob_timer_timeout() -> void:
+	var mob = mob_scene.instantiate()
+	
+	var path = _new_path()
+	path.add_child(mob)
+	add_child(path)
