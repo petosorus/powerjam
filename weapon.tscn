@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://mie1j6xw0ubk"]
+
+[ext_resource type="Texture2D" uid="uid://xnj3dip2qfhc" path="res://art/bullet.png" id="1_4qm6w"]
+[ext_resource type="Script" path="res://weapon.gd" id="1_ill58"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ol31"]
+radius = 3.0
+height = 22.0
+
+[node name="Weapon" type="PathFollow2D"]
+script = ExtResource("1_ill58")
+
+[node name="Weapon" type="Area2D" parent="."]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Weapon"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+rotation = -1.5708
+texture = ExtResource("1_4qm6w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
+shape = SubResource("CapsuleShape2D_8ol31")
+
+[connection signal="area_entered" from="Weapon" to="." method="_on_weapon_area_entered"]

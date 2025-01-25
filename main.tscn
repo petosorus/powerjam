@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cihjguciuonce"]
+[gd_scene load_steps=6 format=3 uid="uid://cihjguciuonce"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b8p3e"]
 [ext_resource type="PackedScene" uid="uid://cf63eq27evtlh" path="res://player.tscn" id="2_6poj5"]
 [ext_resource type="PackedScene" uid="uid://c28mfx5mxmoii" path="res://mob.tscn" id="2_vhd3h"]
 [ext_resource type="PackedScene" uid="uid://d32wo4kbuw2sj" path="res://bonus.tscn" id="3_y6vb0"]
+[ext_resource type="PackedScene" uid="uid://mie1j6xw0ubk" path="res://weapon.tscn" id="4_ar1ti"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_b8p3e")
 mob_scene = ExtResource("2_vhd3h")
 bonus_scene = ExtResource("3_y6vb0")
+weapon_scene = ExtResource("4_ar1ti")
 
 [node name="Player" parent="." instance=ExtResource("2_6poj5")]
 
@@ -20,5 +22,8 @@ wait_time = 5.0
 
 [node name="MobTimer" type="Timer" parent="."]
 
+[node name="WeaponTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="BonusTimer" to="." method="_on_bonus_timer_timeout"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

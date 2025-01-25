@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var bonus_scene: PackedScene
+@export var weapon_scene: PackedScene
 var score
 var bonuses = [
 	"res://bonus/big.gd",
@@ -12,6 +13,7 @@ var bonuses = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player.start($StartPosition.position)
+	$WeaponTimer.start()
 	$BonusTimer.start()
 	$MobTimer.start()
 
@@ -63,10 +65,27 @@ func _on_bonus_timer_timeout() -> void:
 	add_child(path)
 	
 
-
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
 	
 	var path = _new_path()
 	path.add_child(mob)
+	add_child(path)
+
+
+func _on_weapon_timer_timeout() -> void:
+	var weapon = weapon_scene.instantiate()
+	
+	var path = Path2D.new()
+	var curve = Curve2D.new()
+	path.set_curve(curve)
+	
+	var width = get_viewport().get_visible_rect().size[0]
+	var height = get_viewport().get_visible_rect().size[1]
+	
+	path.curve.add_point(Vector2($Player.position))
+	path.curve.add_point(Vector2($Player.position[0], 0))
+	path.add_child(weapon)
+	
+	print("Player:", $Player.position, "Weapon: ", path.curve.get_point_position(0), path.curve.get_point_position(1))
 	add_child(path)
