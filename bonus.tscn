@@ -13,9 +13,6 @@ script = ExtResource("1_njoqc")
 [node name="Bonus" type="Area2D" parent="."]
 rotation = -1.5708
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Bonus"]
-enable_node_path = NodePath("../..")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bonus"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ypf1n")
@@ -24,4 +21,3 @@ shape = SubResource("CapsuleShape2D_ypf1n")
 texture = ExtResource("2_xcrao")
 
 [connection signal="area_entered" from="Bonus" to="." method="_on_bonus_area_entered"]
-[connection signal="screen_exited" from="Bonus/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

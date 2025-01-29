@@ -33,7 +33,6 @@ func start(pos):
 	$CollisionPolygon2D.disabled = false
 
 func _on_area_entered(area: Area2D) -> void:
-	print(area, area.name)
 	if area.name.begins_with("Bonus"):
 		pass
 	if area.name.begins_with("Mob"):

@@ -3,11 +3,15 @@ extends Node
 @export var mob_scene: PackedScene
 @export var bonus_scene: PackedScene
 @export var weapon_scene: PackedScene
-var score
+
+var game_speed = 1
 var bonuses = [
-	"res://bonus/big.gd",
-	"res://bonus/normal.gd",
-	"res://bonus/small.gd"
+	"res://bonus/ship_size/big.gd",
+	"res://bonus/ship_size/normal.gd",
+	"res://bonus/ship_size/small.gd",
+	"res://bonus/splitter.gd",
+	"res://bonus/game_speed/game_slow.gd",
+	"res://bonus/game_speed/game_fast.gd"
 ]
 
 # Called when the node enters the scene tree for the first time.
@@ -31,7 +35,7 @@ func game_over():
 	#$HUD.show_game_over()
 
 func new_game():
-	score = 0
+	pass
 	#$Player.start($StartPosition.position)
 	#$StartTimer.start()
 	#
@@ -40,6 +44,8 @@ func new_game():
 	#
 	#get_tree().call_group("mobs", "queue_free")
 
+func update_game_speed(speed):
+	Engine.time_scale = speed
 
 func _new_path():
 	var path = Path2D.new()
@@ -87,5 +93,5 @@ func _on_weapon_timer_timeout() -> void:
 	path.curve.add_point(Vector2($Player.position[0], 0))
 	path.add_child(weapon)
 	
-	print("Player:", $Player.position, "Weapon: ", path.curve.get_point_position(0), path.curve.get_point_position(1))
+	#print("Player:", $Player.position, "Weapon: ", path.curve.get_point_position(0), path.curve.get_point_position(1))
 	add_child(path)

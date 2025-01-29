@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://coyl4forcml53"]
+
+[ext_resource type="Script" path="res://splitter.gd" id="1_6xiv6"]
+[ext_resource type="Texture2D" uid="uid://41de7mqxwh57" path="res://art/splitter.png" id="1_h5ufx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxg48"]
+size = Vector2(80, 20)
+
+[node name="Splitter" type="Area2D"]
+script = ExtResource("1_6xiv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_h5ufx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bxg48")

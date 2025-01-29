@@ -8,8 +8,6 @@ script = ExtResource("1_k4fnt")
 
 [node name="Mob" type="Area2D" parent="."]
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Mob"]
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mob"]
 polygon = PackedVector2Array(-44, -32, -44, -16, -21, 13, -21, 37, 20, 37, 20, 13, 44, -16, 44, -32)
 

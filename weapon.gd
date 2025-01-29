@@ -12,10 +12,10 @@ func _process(delta: float) -> void:
 	var newProgress = self.get_progress() + _speed * delta
 	var pathLength = get_parent().curve.get_baked_length()
 	if (newProgress >= pathLength):
-		queue_free()
+		delete()
 	self.set_progress(newProgress)
 
-func _on_visible_on_screen_enabler_2d_screen_exited():
+func delete():
 	get_parent().queue_free()
 	queue_free()
 
