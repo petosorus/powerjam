@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var speed = 400
+@export var default_speed = 400
+var speed = default_speed
 var screen_size
 
 # Called when the node enters the scene tree for the first time.

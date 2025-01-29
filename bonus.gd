@@ -3,6 +3,9 @@ extends PathFollow2D
 class_name Bonus
 
 var _player
+var category: String
+var bonus: String
+
 const _speed = 100
 
 func set_player(player):
@@ -30,5 +33,7 @@ func delete():
 
 func _on_bonus_area_entered(area: Area2D) -> void:
 	if area.name == "Player":
+		get_parent().get_parent().current_bonuses.erase(category)
+		get_parent().get_parent().current_bonuses.get_or_add(category, bonus)
 		effect()
 		queue_free()
