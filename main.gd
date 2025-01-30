@@ -7,10 +7,15 @@ extends Node
 enum Orientations { TOP, BOTTOM, RIGHT, LEFT }
 
 var game_speed = 1
+var bullet_number = 0
+
 @export var path_orientation: Orientations = Orientations.TOP
 var bonuses = {
 	"weapons": [
 		"res://bonus/splitter.gd",
+		"res://bonus/bullets/one.gd",
+		"res://bonus/bullets/two.gd",
+		"res://bonus/bullets/three.gd"
 	],
 	"ship_size": [
 		"res://bonus/ship_size/big.gd",
@@ -143,19 +148,63 @@ func _on_mob_timer_timeout() -> void:
 	add_child(path)
 
 
-func _on_weapon_timer_timeout() -> void:
-	var weapon = weapon_scene.instantiate()
+func _on_weapon_timer_timeout() -> void:	
+	if not current_bonuses.get("weapons").contains("bullets"):
+		bullet_number = 0
 	
 	var path = Path2D.new()
 	var curve = Curve2D.new()
 	path.set_curve(curve)
 	
-	var width = get_viewport().get_visible_rect().size[0]
-	var height = get_viewport().get_visible_rect().size[1]
+	if bullet_number == 1:
+		var weapon = weapon_scene.instantiate()
+		path.curve.add_point(Vector2($Player.position))
+		path.curve.add_point(Vector2($Player.position[0], 0))
+		path.add_child(weapon)
+		
+		add_child(path)
+	elif bullet_number == 2:
+		var width = get_viewport().get_visible_rect().size[0]
 	
-	path.curve.add_point(Vector2($Player.position))
-	path.curve.add_point(Vector2($Player.position[0], 0))
-	path.add_child(weapon)
-	
-	#print("Player:", $Player.position, "Weapon: ", path.curve.get_point_position(0), path.curve.get_point_position(1))
-	add_child(path)
+		var weapon = weapon_scene.instantiate()
+		path.curve.add_point(Vector2($Player.position))
+		path.curve.add_point(Vector2(0, $Player.position[1] - $Player.position[0]))
+		path.add_child(weapon)
+		
+		weapon = weapon_scene.instantiate()
+		var path2 = Path2D.new()
+		curve = Curve2D.new()
+		path2.set_curve(curve)
+		path2.curve.add_point(Vector2($Player.position))
+		path2.curve.add_point(Vector2(width, $Player.position[1] - (width - $Player.position[0])))
+		path2.add_child(weapon)
+		
+		add_child(path)
+		add_child(path2)
+	elif bullet_number == 3:
+		var width = get_viewport().get_visible_rect().size[0]
+		
+		var weapon = weapon_scene.instantiate()
+		path.curve.add_point(Vector2($Player.position))
+		path.curve.add_point(Vector2($Player.position[0], 0))
+		path.add_child(weapon)
+		
+		weapon = weapon_scene.instantiate()
+		var path2 = Path2D.new()
+		curve = Curve2D.new()
+		path2.set_curve(curve)
+		path2.curve.add_point(Vector2($Player.position))
+		path2.curve.add_point(Vector2(0, $Player.position[1]))
+		path2.add_child(weapon)
+		
+		weapon = weapon_scene.instantiate()
+		var path3 = Path2D.new()
+		curve = Curve2D.new()
+		path3.set_curve(curve)
+		path3.curve.add_point(Vector2($Player.position))
+		path3.curve.add_point(Vector2(width, $Player.position[1]))
+		path3.add_child(weapon)
+		
+		add_child(path)
+		add_child(path2)
+		add_child(path3)
