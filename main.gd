@@ -17,32 +17,32 @@ var bonuses = {
 		"res://bonus/bullets/two.gd",
 		"res://bonus/bullets/three.gd"
 	],
-	"ship_size": [
-		"res://bonus/ship_size/big.gd",
-		"res://bonus/ship_size/normal.gd",
-		"res://bonus/ship_size/small.gd",
-	],
-	"bonus_rate": [
-		"res://bonus/bonus_rate/faster.gd",
-		"res://bonus/bonus_rate/fast.gd",
-		"res://bonus/bonus_rate/normal.gd",
-	],
-	"game_speed": [
-		"res://bonus/game_speed/slow.gd",
-		"res://bonus/game_speed/fast.gd",
-		"res://bonus/game_speed/normal.gd",
-	],
-	"ship_speed": [
-		"res://bonus/ship_speed/slow.gd",
-		"res://bonus/ship_speed/fast.gd",
-		"res://bonus/ship_speed/normal.gd",
-	],
-	"orientations": [
-		"res://bonus/orientation/top.gd",
-		"res://bonus/orientation/bottom.gd",
-		"res://bonus/orientation/left.gd",
-		"res://bonus/orientation/right.gd",
-	]
+	#"ship_size": [
+		#"res://bonus/ship_size/big.gd",
+		#"res://bonus/ship_size/normal.gd",
+		#"res://bonus/ship_size/small.gd",
+	#],
+	#"bonus_rate": [
+		#"res://bonus/bonus_rate/faster.gd",
+		#"res://bonus/bonus_rate/fast.gd",
+		#"res://bonus/bonus_rate/normal.gd",
+	#],
+	#"game_speed": [
+		#"res://bonus/game_speed/slow.gd",
+		#"res://bonus/game_speed/fast.gd",
+		#"res://bonus/game_speed/normal.gd",
+	#],
+	#"ship_speed": [
+		#"res://bonus/ship_speed/slow.gd",
+		#"res://bonus/ship_speed/fast.gd",
+		#"res://bonus/ship_speed/normal.gd",
+	#],
+	#"orientations": [
+		#"res://bonus/orientation/top.gd",
+		#"res://bonus/orientation/bottom.gd",
+		#"res://bonus/orientation/left.gd",
+		#"res://bonus/orientation/right.gd",
+	#]
 }
 
 var current_bonuses = {
