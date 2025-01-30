@@ -11,7 +11,7 @@ height = 22.0
 script = ExtResource("1_ill58")
 
 [node name="Weapon" type="Area2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Weapon"]
 texture = ExtResource("1_4qm6w")
