@@ -7,7 +7,7 @@ extends Node
 enum Orientations { TOP, BOTTOM, RIGHT, LEFT }
 
 var game_speed = 1
-var bullet_number = 0
+var bullet_number = 1
 
 var path_orientation: Orientations = Orientations.TOP
 var bonuses = {
@@ -46,7 +46,7 @@ var bonuses = {
 }
 
 var current_bonuses = {
-	"weapons": "",
+	"weapons": "res://bonus/bullets/one.gd",
 	"ship_size": "res://bonus/ship_size/normal.gd",
 	"bonus_rate": "res://bonus/bonus_rate/normal.gd",
 	"game_speed": "res://bonus/game_speed/normal.gd",
@@ -60,6 +60,7 @@ func _ready():
 	$WeaponTimer.start()
 	$BonusTimer.start()
 	$MobTimer.start()
+	$WaveTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -214,3 +215,9 @@ func _on_weapon_timer_timeout() -> void:
 		add_child(path)
 		add_child(path2)
 		add_child(path3)
+
+
+func _on_wave_timer_timeout() -> void:
+	for i in range(30):
+		await get_tree().create_timer(0.01).timeout
+		_on_bonus_timer_timeout()

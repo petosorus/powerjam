@@ -24,7 +24,11 @@ wait_time = 5.0
 
 [node name="WeaponTimer" type="Timer" parent="."]
 
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 30.0
+
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="timeout" from="BonusTimer" to="." method="_on_bonus_timer_timeout"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
