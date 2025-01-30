@@ -28,7 +28,7 @@ var bonuses = {
 		"res://bonus/bonus_rate/normal.gd",
 	],
 	"game_speed": [
-		"res://bonus/game_speed/slow.gd",
+		#"res://bonus/game_speed/slow.gd",
 		"res://bonus/game_speed/fast.gd",
 		"res://bonus/game_speed/normal.gd",
 	],

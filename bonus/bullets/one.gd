@@ -1,5 +1,8 @@
 extends Bonus
 
+func set_sprite():
+	$Bonus/Sprite2D.set_texture(load("res://art/weapon_bonus.png"))
+
 func effect():
 	get_parent().get_parent().bullet_number = 1
 	if _player.get_children().size() == 3:
