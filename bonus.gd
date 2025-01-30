@@ -11,12 +11,15 @@ const _speed = 100
 func set_player(player):
 	_player = player
 
+func set_sprite():
+	print("no effect on base class")
+
 func effect():
 	print("no effect on base class")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	set_sprite()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
