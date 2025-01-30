@@ -9,40 +9,46 @@ enum Orientations { TOP, BOTTOM, RIGHT, LEFT }
 var game_speed = 1
 var bullet_number = 0
 
-@export var path_orientation: Orientations = Orientations.TOP
+var path_orientation: Orientations = Orientations.TOP
 var bonuses = {
-	"weapons": [
-		"res://bonus/splitter.gd",
-		"res://bonus/bullets/one.gd",
-		"res://bonus/bullets/two.gd",
-		"res://bonus/bullets/three.gd"
+	#"weapons": [
+		#"res://bonus/splitter.gd",
+		#"res://bonus/bullets/one.gd",
+		#"res://bonus/bullets/two.gd",
+		#"res://bonus/bullets/three.gd"
+	#],
+	#"ship_size": [
+		#"res://bonus/ship_size/big.gd",
+		#"res://bonus/ship_size/normal.gd",
+		#"res://bonus/ship_size/small.gd",
+	#],
+	"bonus_rate": [
+		"res://bonus/bonus_rate/faster.gd",
+		"res://bonus/bonus_rate/fast.gd",
+		"res://bonus/bonus_rate/normal.gd",
 	],
-	"ship_size": [
-		"res://bonus/ship_size/big.gd",
-		"res://bonus/ship_size/normal.gd",
-		"res://bonus/ship_size/small.gd",
-	],
-	"game_speed": [
-		"res://bonus/game_speed/slow.gd",
-		"res://bonus/game_speed/fast.gd",
-		"res://bonus/game_speed/normal.gd",
-	],
-	"ship_speed": [
-		"res://bonus/ship_speed/slow.gd",
-		"res://bonus/ship_speed/fast.gd",
-		"res://bonus/ship_speed/normal.gd",
-	],
-	"orientations": [
-		"res://bonus/orientation/top.gd",
-		"res://bonus/orientation/bottom.gd",
-		"res://bonus/orientation/left.gd",
-		"res://bonus/orientation/right.gd",
-	]
+	#"game_speed": [
+		#"res://bonus/game_speed/slow.gd",
+		#"res://bonus/game_speed/fast.gd",
+		#"res://bonus/game_speed/normal.gd",
+	#],
+	#"ship_speed": [
+		#"res://bonus/ship_speed/slow.gd",
+		#"res://bonus/ship_speed/fast.gd",
+		#"res://bonus/ship_speed/normal.gd",
+	#],
+	#"orientations": [
+		#"res://bonus/orientation/top.gd",
+		#"res://bonus/orientation/bottom.gd",
+		#"res://bonus/orientation/left.gd",
+		#"res://bonus/orientation/right.gd",
+	#]
 }
 
 var current_bonuses = {
 	"weapons": "res://bonus/splitter.gd",
 	"ship_size": "res://bonus/ship_size/normal.gd",
+	"bonus_rate": "res://bonus/bonus_rate/normal.gd",
 	"game_speed": "res://bonus/game_speed/normal.gd",
 	"ship_speed": "res://bonus/ship_speed/normal.gd",
 	"orientations": "res://bonus/orientation/top.gd"
@@ -122,6 +128,7 @@ func _new_path():
 	return path
 
 func _on_bonus_timer_timeout() -> void:
+	print("bonus timout")
 	var bonus: Bonus = bonus_scene.instantiate()
 	var random_category = bonuses.keys()[randi_range(0, bonuses.size() - 1)]
 	var random_bonus = bonuses.get(random_category).pick_random()
