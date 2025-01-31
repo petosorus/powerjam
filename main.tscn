@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cihjguciuonce"]
+[gd_scene load_steps=8 format=3 uid="uid://cihjguciuonce"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b8p3e"]
 [ext_resource type="PackedScene" uid="uid://cf63eq27evtlh" path="res://player.tscn" id="2_6poj5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d32wo4kbuw2sj" path="res://bonus.tscn" id="3_y6vb0"]
 [ext_resource type="PackedScene" uid="uid://mie1j6xw0ubk" path="res://weapon.tscn" id="4_ar1ti"]
 [ext_resource type="PackedScene" uid="uid://c5latygwbgb3t" path="res://hud.tscn" id="6_6b0hw"]
+[ext_resource type="PackedScene" uid="uid://qirlanf6hrs3" path="res://background.tscn" id="7_galaj"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_b8p3e")
@@ -31,6 +32,8 @@ wait_time = 5.0
 wait_time = 30.0
 
 [node name="HUD" parent="." instance=ExtResource("6_6b0hw")]
+
+[node name="Background" parent="." instance=ExtResource("7_galaj")]
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="hit" from="Player" to="." method="game_over"]

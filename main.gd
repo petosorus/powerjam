@@ -67,6 +67,7 @@ var current_bonuses = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#$AudioStreamPlayer.play()
 	pass
 
 
@@ -262,3 +263,8 @@ func _on_wave_timer_timeout() -> void:
 func _on_score_timer_timeout() -> void:
 	score += 1
 	$HUD.update_score(score)
+
+
+#func _on_audio_stream_player_finished() -> void:
+	#$AudioStreamPlayer.play()
+	#pass # Replace with function body.
