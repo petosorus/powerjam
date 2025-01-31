@@ -1,5 +1,7 @@
 extends PathFollow2D
 
+signal mob_hit
+
 const _speed = 200
 
 # Called when the node enters the scene tree for the first time.
@@ -24,5 +26,6 @@ func delete():
 
 func _on_mob_area_entered(area: Area2D) -> void:
 	if area.name.begins_with("Weapon") or area.name.begins_with("Splitter"):
+		mob_hit.emit()
 		get_parent().queue_free()
 		queue_free()

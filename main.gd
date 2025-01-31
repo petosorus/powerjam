@@ -6,6 +6,8 @@ extends Node
 
 enum Orientations { TOP, BOTTOM, RIGHT, LEFT }
 
+var score = 0
+
 var game_speed = 1
 var bullet_number = 1
 
@@ -45,6 +47,15 @@ var bonuses = {
 	]
 }
 
+const start_bonuses = {
+	"weapons": "res://bonus/bullets/one.gd",
+	"ship_size": "res://bonus/ship_size/normal.gd",
+	"bonus_rate": "res://bonus/bonus_rate/normal.gd",
+	"game_speed": "res://bonus/game_speed/normal.gd",
+	"ship_speed": "res://bonus/ship_speed/normal.gd",
+	"orientations": "res://bonus/orientation/top.gd"
+}
+
 var current_bonuses = {
 	"weapons": "res://bonus/bullets/one.gd",
 	"ship_size": "res://bonus/ship_size/normal.gd",
@@ -56,11 +67,7 @@ var current_bonuses = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Player.start($StartPosition.position)
-	$WeaponTimer.start()
-	$BonusTimer.start()
-	$MobTimer.start()
-	$WaveTimer.start()
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -68,22 +75,44 @@ func _process(delta):
 	pass
 
 
+func mob_killed():
+	score += 5
+	$HUD.update_score(score)
+
 func game_over():
-	pass
-	#$ScoreTimer.stop()
-	#$MobTimer.stop()
-	#
-	#$HUD.show_game_over()
+	$ScoreTimer.stop()
+	$WeaponTimer.stop()
+	$BonusTimer.stop()
+	$MobTimer.stop()
+	$WaveTimer.stop()
+	
+	$HUD.show_game_over()
 
 func new_game():
-	pass
-	#$Player.start($StartPosition.position)
-	#$StartTimer.start()
-	#
-	#$HUD.update_score(score)
-	#$HUD.show_message("Get ready")
-	#
-	#get_tree().call_group("mobs", "queue_free")
+	$HUD._on_message_timer_timeout()
+	$HUD.hide_menu()
+	
+	score = 0
+	$HUD.update_score(score)
+	
+	Engine.time_scale = 1
+	game_speed = 1
+	bullet_number = 1
+	path_orientation = Orientations.TOP
+	current_bonuses = start_bonuses.duplicate()
+	$Player.scale = Vector2(1, 1)
+	if $Player.get_children().size() == 3:
+		$Player.remove_child($Player.get_child(2))
+		
+	
+	$Player.start($StartPosition.position)
+	$Player.show()
+	
+	$ScoreTimer.start()
+	$WeaponTimer.start()
+	$BonusTimer.start()
+	$MobTimer.start()
+	$WaveTimer.start()
 
 func update_game_speed(speed):
 	Engine.time_scale = speed
@@ -149,6 +178,7 @@ func _on_bonus_timer_timeout() -> void:
 
 func _on_mob_timer_timeout() -> void:
 	var mob = mob_scene.instantiate()
+	mob.connect("mob_hit", mob_killed)
 	
 	var path = _new_path()
 	path.add_child(mob)
@@ -221,3 +251,8 @@ func _on_wave_timer_timeout() -> void:
 	for i in range(30):
 		await get_tree().create_timer(0.01).timeout
 		_on_bonus_timer_timeout()
+
+
+func _on_score_timer_timeout() -> void:
+	score += 1
+	$HUD.update_score(score)

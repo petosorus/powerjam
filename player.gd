@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+
 @export var default_speed = 400
 var speed = default_speed
 var screen_size
@@ -37,4 +39,5 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.name.begins_with("Bonus"):
 		pass
 	if area.name.begins_with("Mob"):
-		queue_free()
+		hit.emit()
+		self.hide()
