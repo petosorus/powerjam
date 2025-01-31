@@ -2,6 +2,8 @@ extends PathFollow2D
 
 class_name Bonus
 
+signal bonus_hit
+
 var _player
 var category: String
 var bonus: String
@@ -36,6 +38,7 @@ func delete():
 
 func _on_bonus_area_entered(area: Area2D) -> void:
 	if area.name == "Player":
+		bonus_hit.emit()
 		get_parent().get_parent().current_bonuses.erase(category)
 		get_parent().get_parent().current_bonuses.get_or_add(category, bonus)
 		effect()

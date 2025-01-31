@@ -41,7 +41,7 @@ var bonuses = {
 	],
 	"orientations": [
 		"res://bonus/orientation/top.gd",
-		"res://bonus/orientation/bottom.gd",
+		#"res://bonus/orientation/bottom.gd",
 		"res://bonus/orientation/left.gd",
 		"res://bonus/orientation/right.gd",
 	]
@@ -78,6 +78,10 @@ func _process(delta):
 func mob_killed():
 	score += 5
 	$HUD.update_score(score)
+	
+func bonus_killed():
+	score += 20
+	$HUD.update_score(score)
 
 func game_over():
 	$ScoreTimer.stop()
@@ -100,6 +104,7 @@ func new_game():
 	bullet_number = 1
 	path_orientation = Orientations.TOP
 	current_bonuses = start_bonuses.duplicate()
+	$Player.speed = $Player.default_speed
 	$Player.scale = Vector2(1, 1)
 	if $Player.get_children().size() == 3:
 		$Player.remove_child($Player.get_child(2))
@@ -159,6 +164,7 @@ func _new_path():
 
 func _on_bonus_timer_timeout() -> void:
 	var bonus: Bonus = bonus_scene.instantiate()
+	bonus.connect("bonus_hit", bonus_killed)
 	var random_category = bonuses.keys()[randi_range(0, bonuses.size() - 1)]
 	var random_bonus = bonuses.get(random_category).pick_random()
 		
